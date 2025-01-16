@@ -2,6 +2,16 @@ import instance from '../instance'
 
 export class BoardApi{
 
+    async retrieveBoard(){
+        const {data} = await instance.get("board")
+        return data
+    }
+
+    async getBoard(id){
+        const {data} = await instance.get(`board/${id}`)
+        return data
+    }
+
     async saveBoard(param){
         const {data} = await instance.post("board",param)
         return data

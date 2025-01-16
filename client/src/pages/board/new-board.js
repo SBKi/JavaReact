@@ -1,27 +1,56 @@
-import { useLocation } from "react-router-dom";
-import {Button} from "react-bootstrap";
+import {Button, Container, Form} from "react-bootstrap";
+import {useState} from "react";
 import board from "../../axios/services/board";
+import {useNavigate} from "react-router-dom";
 
 const NewBoard = () => {
-    const location = useLocation();
-    function saveBoard(){
-        let param={title:"test",content:"test"}
-        board.saveBoard(param)
+    const [formData, setData]=useState({title:"",content:""})
+    const [validated, setValidated] = useState(false);
+    const navigate = useNavigate()
+
+    function handleTitle(e){
+        setData({...formData, title: e.target.value})
     }
-    function updateBoard(){
-        let param={title:"2test",content:"test2"}
-        board.updateBoard(4,param)
+
+    function handleContent(e){
+        setData({...formData, content: e.target.value})
     }
-    function deleteBoard(){
-        board.deleteBoard(1)
+
+    function handleSubmit(e){
+        const form = e.currentTarget;
+        if (form.checkValidity()=== false){
+            e.preventDefault()
+            e.stopPropagation()
+            setValidated(true)
+        }else{
+            e.preventDefault()
+            e.stopPropagation()
+            setValidated(false)
+            board.saveBoard(formData).then(()=>{
+                navigate("/");
+            }).catch((err) => {
+                console.log(err)
+            });
+        }
     }
+
     return (
-        <div>
-            <Button variant="primary" onClick={saveBoard}>게시글 등록</Button>
-            <Button variant="primary" onClick={updateBoard}>게시글 수정</Button>
-            <Button variant="primary" onClick={deleteBoard}>게시글 삭제</Button>
-            <div>{`현재 페이지 : ${location.pathname.slice(1)}`}</div>
-        </div>
+        <Container>
+            <Form  noValidate validated={validated} onSubmit={handleSubmit} style={{width: "50%", margin: "auto", padding: "2%", background: "#f8f9fa"}} >
+                <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                    <Form.Label>글 제목</Form.Label>
+                    <Form.Control type="text" onChange={handleTitle} required/>
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+                    <Form.Label>글 내용</Form.Label>
+                    <Form.Control as="textarea" rows={13} onChange={handleContent}/>
+                </Form.Group>
+                <div style={{textAlign: "right"}}>
+                    <Button variant="primary" style={{marginRight: "1%"}} type={"submit"}>저장</Button>
+                    <Button variant="danger" href="/">취소</Button>
+                </div>
+            </Form>
+        </Container>
     );
 };
 

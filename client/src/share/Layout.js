@@ -3,10 +3,10 @@ import {Container, Navbar, NavDropdown} from "react-bootstrap";
 
 function Header() {
     return (
-        <Navbar className="bg-body-tertiary">
+        <Navbar className="bg-body-tertiary" style={ {marginBottom: "5%" } }>
             <Container>
-                <Navbar.Brand href="/home">Home</Navbar.Brand>
-                <Navbar.Toggle />
+                <Navbar.Brand href="/">Home</Navbar.Brand>
+                <Navbar.Toggle/>
                 <Navbar.Collapse className="justify-content-end">
                     <NavDropdown title="Admin" id="basic-nav-dropdown">
                         <NavDropdown.Item href="#logout">Sign out</NavDropdown.Item>

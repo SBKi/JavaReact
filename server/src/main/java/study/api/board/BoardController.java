@@ -22,7 +22,7 @@ public class BoardController {
     }
 
     // 목록 조회
-    @GetMapping("/")
+    @GetMapping()
     public PaginatedResponse<ResponseBoard> index(@PageableDefault(size = 5) Pageable pageable) {
         return service.index(pageable);
     }
