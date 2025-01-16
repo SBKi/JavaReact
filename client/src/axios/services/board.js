@@ -2,8 +2,8 @@ import instance from '../instance'
 
 export class BoardApi{
 
-    async retrieveBoard(){
-        const {data} = await instance.get("board")
+    async retrieveBoard(param){
+        const {data} = await instance.get("board",{params:param})
         return data
     }
 
