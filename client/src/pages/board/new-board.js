@@ -18,19 +18,19 @@ const NewBoard = () => {
 
     function handleSubmit(e){
         const form = e.currentTarget;
-        if (form.checkValidity()=== false){
-            e.preventDefault()
-            e.stopPropagation()
-            setValidated(true)
-        }else{
+        if (form.checkValidity()){
             e.preventDefault()
             e.stopPropagation()
             setValidated(false)
-            board.saveBoard(formData).then(()=>{
+            board.saveBoard(formData).then(() => {
                 navigate("/");
             }).catch((err) => {
                 console.log(err)
             });
+        }else{
+            e.preventDefault()
+            e.stopPropagation()
+            setValidated(true)
         }
     }
 

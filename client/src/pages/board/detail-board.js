@@ -38,11 +38,7 @@ const DetailBoard = () => {
 
     function handleSubmit(e){
         const form = e.currentTarget;
-        if (form.checkValidity()=== false){
-            e.preventDefault()
-            e.stopPropagation()
-            setValidated(true)
-        }else{
+        if (form.checkValidity()){
             e.preventDefault()
             e.stopPropagation()
             setValidated(false)
@@ -51,6 +47,10 @@ const DetailBoard = () => {
             }).catch((err) => {
                 console.log(err)
             });
+        }else {
+            e.preventDefault()
+            e.stopPropagation()
+            setValidated(true)
         }
     }
 
