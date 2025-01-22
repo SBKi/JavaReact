@@ -13,12 +13,12 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("/login")
-    public String login(@RequestBody RequestLogin req){
+    public String login(@RequestBody RequestLogin req) throws Exception {
         return authService.login(req);
     }
 
     @PostMapping("/signup")
-    public void signup(@RequestBody RequestSignup req){
-        authService.signup(req);
+    public String signup(@RequestBody RequestSignup req){
+        return authService.signup(req);
     }
 }

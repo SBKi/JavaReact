@@ -1,23 +1,24 @@
 import {Button, Container, Form} from "react-bootstrap";
 import {useState} from "react";
 import authApi from "../../axios/services/auth";
-// import {useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
-const Singup = ()=>{
+const Signup = ()=>{
     const [info, setInfo] =useState({Id:"",Password:"",NickName:""})
+    const [errorMsg, setError] = useState()
     const [validated, setValidated] = useState(false);
-    // const navigate = useNavigate()
+    const navigate = useNavigate()
 
     function handleID(e){
         setInfo({...info, Id: e.target.value})
     }
 
     function handlePassword(e){
-        setInfo({...info, Id: e.target.value})
+        setInfo({...info, Password: e.target.value})
     }
 
     function handleNickName(e){
-        setInfo({...info, Id: e.target.value})
+        setInfo({...info, NickName: e.target.value})
     }
 
     function handleSubmit(e){
@@ -26,11 +27,11 @@ const Singup = ()=>{
             e.preventDefault()
             e.stopPropagation()
             setValidated(false)
-            const param = {loginID:"1",password:"2",nickName:"3"}
+            const param = {loginID:info.Id,password:info.Password,nickName:info.NickName}
             authApi.signup(param).then(()=>{
-                console.log("a")
+                navigate("/login");
             }).catch((err)=>{
-                console.log(err)
+                setError(err.message)
             })
         }else {
             e.preventDefault()
@@ -58,8 +59,11 @@ const Singup = ()=>{
                 <div style={{textAlign: "center"}}>
                     <Button variant="outline-dark" style={{width: "35%", height: "3em"}} type={"submit"}>회원가입</Button>
                 </div>
+                <p style={{marginTop:"2%",color:"red",fontSize:"80%"}}>
+                    {errorMsg}
+                </p>
             </Form>
         </Container>
     );
 }
-export default Singup
+export default Signup
