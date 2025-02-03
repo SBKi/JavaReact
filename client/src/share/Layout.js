@@ -5,13 +5,12 @@ import {Outlet, useNavigate} from "react-router-dom";
 function Header() {
     const navigate = useNavigate();
     const token = localStorage.getItem('loginToken');
-    const [nickName,setNick]=useState()
+    const nickName = localStorage.getItem('nickName');
 
     useEffect(() => {
         if (!token) {
             navigate('/login', { replace: true });
         }
-        setNick(token)
     }, [token, navigate]);
 
     function handleLogout(){

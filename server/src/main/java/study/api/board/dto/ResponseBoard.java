@@ -12,6 +12,7 @@ public class ResponseBoard {
     public Long id;
     private String title;
     private String content;
+    private ResponseMember creator;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
@@ -20,6 +21,7 @@ public class ResponseBoard {
             board.getId(),
             board.getTitle(),
             board.getContent(),
+            ResponseMember.build(board.getCreator()),
             board.getCreatedAt(),
             board.getUpdatedAt()
         );

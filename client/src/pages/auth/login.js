@@ -23,7 +23,7 @@ const Login = ()=>{
             e.preventDefault()
             e.stopPropagation()
             setValidated(false)
-            const param = {loginID:info.Id,password:info.Password}
+            const param = {loginId:info.Id,password:info.Password}
             authApi.login(param).then(()=>{
                 navigate("/");
             }).catch((err)=>{

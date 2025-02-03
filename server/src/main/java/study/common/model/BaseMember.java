@@ -15,8 +15,8 @@ public class BaseMember extends TimeStamp {
     @GeneratedValue
     private Long id;
 
-    @Column(unique = true , nullable = false)
-    private String loginID;
+    @Column(name = "login_id", unique = true , nullable = false)
+    private String loginId;
 
     @Column(nullable = false)
     private String password;

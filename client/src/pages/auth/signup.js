@@ -27,7 +27,7 @@ const Signup = ()=>{
             e.preventDefault()
             e.stopPropagation()
             setValidated(false)
-            const param = {loginID:info.Id,password:info.Password,nickName:info.NickName}
+            const param = {loginId:info.Id,password:info.Password,nickName:info.NickName}
             authApi.signup(param).then(()=>{
                 navigate("/login");
             }).catch((err)=>{

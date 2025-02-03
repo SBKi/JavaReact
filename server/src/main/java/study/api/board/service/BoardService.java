@@ -21,18 +21,22 @@ public class BoardService {
 
     // 생성
     @Transactional // 따로 설정시 우선 (데이터 수정이 되어야 함 상단에 readOnly 선언 되어 있기 때문)
-    public ResponseBoard save(RequestBoard req) {
+    public ResponseBoard save(RequestBoard req,Long memberId) {
         Board board = Board.builder()
                 .title(req.getTitle())
                 .content(req.getContent())
+                .creatorId(memberId)
                 .build();
 
-        return ResponseBoard.build(boardRepository.save(board));
+            Board savedBoard = boardRepository.save(board);
+            Board boardWithMembers = boardRepository.findByIdWithMember(savedBoard.getId());
+        System.out.println("boardWithMembers.getCreator() : "+boardWithMembers.getCreator());
+        return ResponseBoard.build(boardWithMembers);
     }
 
     // 목록 조회
     public PaginatedResponse<ResponseBoard> index(Pageable pageable) {
-        Page<ResponseBoard> boards = boardRepository.findAllByOrderByCreatedAtDesc(pageable).map(ResponseBoard::build);
+        Page<ResponseBoard> boards = boardRepository.findAllWithWorkers(pageable).map(ResponseBoard::build);
         return PaginatedResponse.<ResponseBoard>builder()
                 .data(boards.getContent())
                 .max(boards.getSize())

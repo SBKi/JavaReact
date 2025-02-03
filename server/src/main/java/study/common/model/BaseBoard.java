@@ -1,6 +1,7 @@
 package study.common.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
@@ -11,6 +12,7 @@ import study.common.dto.TimeStamp;
 @SuperBuilder
 @MappedSuperclass  // 상속 엔티티 명시
 @NoArgsConstructor
+@AllArgsConstructor
 public abstract class BaseBoard extends TimeStamp {
     @Id
     @GeneratedValue
@@ -21,6 +23,9 @@ public abstract class BaseBoard extends TimeStamp {
 
     @Column(nullable = false)
     private String content;
+
+    @Column(name = "creator_id", nullable = false)
+    private Long creatorId;
 
     private boolean is_deleted = Boolean.FALSE;
 

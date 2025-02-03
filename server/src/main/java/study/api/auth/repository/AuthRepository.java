@@ -8,5 +8,5 @@ import java.util.Optional;
 
 @Repository
 public interface AuthRepository extends JpaRepository<Member,Long> {
-    Optional<Member> findByLoginID(String loginID);
+    Optional<Member> findByLoginId(String loginId);
 }

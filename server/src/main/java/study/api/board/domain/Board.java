@@ -1,6 +1,6 @@
 package study.api.board.domain;
 
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
@@ -8,19 +8,23 @@ import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 import study.common.model.BaseBoard;
 
-@Entity
+@Entity(name = "Board")
 @Getter
 @SuperBuilder
 @NoArgsConstructor
 @SQLDelete(sql = "UPDATE board SET is_deleted = true WHERE id = ?")  // SoftDelete 사용
 @Where(clause = "is_deleted = false")   // 조회시 SoftDelete 여부 확인
+@Table(name="board")
 public class Board extends BaseBoard {
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="creator_id", insertable = false, updatable = false)
+    private Member creator;
 
     // Dirty Check Update
     public void updateBoard(String title, String content) {
         this.setTitle(title);
         this.setContent(content);
-
         // findById를 해서 가져온 데이터는 영속성 데이터 이기때문에
         // 해당 데이터를 setter로 수정시 DB의 데이터도 수정됨 ( 실제 쿼리도 날아감 )
         // 해당 방법으로의 작업은 서비스단에서 데이터 수정시 조심해서 사용해야 하고

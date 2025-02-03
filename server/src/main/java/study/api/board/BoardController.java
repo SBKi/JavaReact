@@ -1,5 +1,6 @@
 package study.api.board;
 
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -8,6 +9,7 @@ import study.api.board.dto.RequestBoard;
 import study.api.board.dto.ResponseBoard;
 import study.api.board.service.BoardService;
 import study.common.dto.PaginatedResponse;
+import study.common.util.AuthUtil;
 
 @RestController
 @RequestMapping("/board")
@@ -17,8 +19,9 @@ public class BoardController {
 
     // 생성
     @PostMapping
-    public ResponseBoard save(@RequestBody RequestBoard req) {
-        return service.save(req);
+    public ResponseBoard save(HttpServletRequest request, @RequestBody RequestBoard requestBoard) {
+        Long MemberId = AuthUtil.getAuthMemberId(request);
+        return service.save(requestBoard,MemberId);
     }
 
     // 목록 조회

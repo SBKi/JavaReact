@@ -1,6 +1,7 @@
 package study.api.auth;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import study.api.auth.dto.RequestLogin;
 import study.api.auth.dto.RequestSignup;
@@ -13,7 +14,7 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("/login")
-    public String login(@RequestBody RequestLogin req) throws Exception {
+    public ResponseEntity<?> login(@RequestBody RequestLogin req) {
         return authService.login(req);
     }
 
