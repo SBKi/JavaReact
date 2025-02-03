@@ -10,7 +10,7 @@ import study.common.dto.TimeStamp;
 @SuperBuilder
 @MappedSuperclass
 @NoArgsConstructor
-public class BaseMember extends TimeStamp {
+public abstract class BaseMember extends TimeStamp {
     @Id
     @GeneratedValue
     private Long id;

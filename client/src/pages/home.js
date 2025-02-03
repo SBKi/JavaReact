@@ -64,7 +64,7 @@ const Home = () => {
                             <td>{board.title}</td>
                             <td style={{textAlign: "center"}}>{board.createdAt}</td>
                             <td style={{textAlign: "center"}}>{board.updatedAt}</td>
-                            <td style={{textAlign: "center"}}>admin</td>
+                            <td style={{textAlign: "center"}}>{board.creator.nickName}</td>
                         </tr>
                     ))}
                     </tbody>

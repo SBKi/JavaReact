@@ -30,7 +30,6 @@ public class BoardService {
 
             Board savedBoard = boardRepository.save(board);
             Board boardWithMembers = boardRepository.findByIdWithMember(savedBoard.getId());
-        System.out.println("boardWithMembers.getCreator() : "+boardWithMembers.getCreator());
         return ResponseBoard.build(boardWithMembers);
     }
 
