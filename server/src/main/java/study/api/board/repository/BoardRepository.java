@@ -15,6 +15,6 @@ public interface BoardRepository extends JpaRepository<Board, Long> {
     @Query("SELECT b FROM Board b JOIN FETCH b.creator")
     Page<Board> findAllWithWorkers(Pageable pageable);
 
-    @Query("SELECT b FROM Board b JOIN FETCH b.creator WHERE b.id = :id")
+    @Query("SELECT b FROM Board b LEFT JOIN FETCH b.creator WHERE b.id = :id")
     Board findByIdWithMember(@Param("id") Long id);
 }

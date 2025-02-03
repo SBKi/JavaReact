@@ -15,6 +15,7 @@ spring:
     properties:
       hibernate:
         format_sql: true
+    open-in-view: false # api요청과 응답까지 영속성메니저가 유지되는 옵션
 
 jwt:
   secretKey: secretKeysecretKeysecretKeysecretKeysecretKeysecretKeysecretKeysecretKeysecretKeysecretKey

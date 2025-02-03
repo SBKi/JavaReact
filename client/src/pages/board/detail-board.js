@@ -15,9 +15,9 @@ const DetailBoard = () => {
     useEffect(()=>{
         board.getBoard(id).then((res)=>{
             const createdAtDate = new Date(res.createdAt)
-            const momentCreatedAtDate = moment(createdAtDate).format('YYYY-MM-DD hh:mm')
+            const momentCreatedAtDate = moment(createdAtDate).format('YYYY-MM-DD HH:m')
             const updatedAtDate = new Date(res.createdAt)
-            const momentUpdatedAtDate = moment(updatedAtDate).format('YYYY-MM-DD hh:mm')
+            const momentUpdatedAtDate = moment(updatedAtDate).format('YYYY-MM-DD HH:m')
             setDate({...dateList,createdAt: momentCreatedAtDate, updatedAt: momentUpdatedAtDate})
             setData({...formData,title:res.title,content: res.content})
 

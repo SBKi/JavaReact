@@ -26,9 +26,9 @@ const Home = () => {
         board.retrieveBoard(param).then((res)=>{
             res.data.map((data)=>{
                 const createdAtDate = new Date(data.createdAt)
-                data.createdAt = moment(createdAtDate).format('YYYY-MM-DD HH:MM')
+                data.createdAt = moment(createdAtDate).format('YYYY-MM-DD HH:m')
                 const updatedAtDate = new Date(data.updatedAt)
-                data.updatedAt = moment(updatedAtDate).format('YYYY-MM-DD HH:MM')
+                data.updatedAt = moment(updatedAtDate).format('YYYY-MM-DD HH:m')
             })
             setData(res.data)
             setTotal(res.total)

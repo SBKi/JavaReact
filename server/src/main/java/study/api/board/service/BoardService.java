@@ -13,14 +13,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 @Service
-@Transactional(readOnly = true) // 성능 최적화
 @RequiredArgsConstructor // final 필드의 (필수) 생성자 생성
 public class BoardService {
 
     private final BoardRepository boardRepository;
 
     // 생성
-    @Transactional // 따로 설정시 우선 (데이터 수정이 되어야 함 상단에 readOnly 선언 되어 있기 때문)
     public ResponseBoard save(RequestBoard req,Long memberId) {
         Board board = Board.builder()
                 .title(req.getTitle())
@@ -46,7 +44,7 @@ public class BoardService {
 
     // 조회(상세)
     public ResponseBoard show(Long id) {
-        return ResponseBoard.build(boardRepository.findById(id).get());
+        return ResponseBoard.build(boardRepository.findByIdWithMember(id));
     }
 
     // 수정
